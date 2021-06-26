@@ -76,6 +76,30 @@ each(@marAndPadAndFontList, {
   }
 });
 
+@transitionTime: {
+  1: .1s;
+  2: .2s;
+  3: .3s;
+  4: .4s;
+  5: .5s;
+  6: .6s;
+  7: .7s;
+  8: .8s;
+}
+
+// transtion
+each(@transitionTime, {
+  .ts-@{key} {
+      transition: all @value ease
+  }
+});
+
+.txt {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .wh {
   width: 100%;
   height: 100%;

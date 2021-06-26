@@ -6,13 +6,13 @@
     <div class="nav wh">
       <ul class="navContainer wh fl">
         <li
-          class="navItem"
+          class="navItem ts-4"
           :class="navIndex == index ? 'curNav' : ''"
           v-for="(item, index) in navList"
           :key="index"
           @click="clickNav(index)"
         >
-          {{ item }}
+          {{ item.name }}
         </li>
       </ul>
     </div>
@@ -22,10 +22,27 @@
         class="searchInput wh fs-16"
         type="text"
         placeholder="Search For Movies..."
+        v-model="searchValue"
+        @keypress.enter="search"
       />
-      <div class="dropDownMenu fl">
-        <p>百度搜索</p>
-        <img class="ml-10" src="../assets/arrowDown.png" alt="" />
+      <div class="dropDownMenu fl" @click="clickDropDown">
+        <p class="ts-4">{{ searchList[searchCur].name }}</p>
+        <img
+          class="ml-10 ts-6"
+          :class="show ? 'rotate' : ''"
+          src="../assets/arrowDown.png"
+          alt=""
+        />
+        <ul class="dropDown" :style="show ? 'display: block' : 'display: none'">
+          <li
+            class="dropDownItem pd-4 ts-2"
+            v-for="(item, index) in searchList"
+            :key="index"
+            @click.stop="clickDropDownItem(index)"
+          >
+            {{ item.name }}
+          </li>
+        </ul>
       </div>
     </div>
     <div class="mine fl cc ml-40">
@@ -41,18 +58,97 @@
 </template>
 
 <script>
-import { defineComponent, reactive, toRefs } from "@vue/runtime-core";
+import { defineComponent, reactive, toRefs, watch } from "@vue/runtime-core";
+import router from "../router";
 
 export default defineComponent({
   setup() {
     const state = reactive({
-      navList: ["Home", "Movies", "Series", "My List"],
+      navList: [
+        {
+          name: "Home",
+          url: "/",
+        },
+        {
+          name: "Movies",
+          url: "movies",
+        },
+        {
+          name: "Series",
+          url: "series",
+        },
+        {
+          name: "My List",
+          url: "mylist",
+        },
+      ],
       navIndex: 0,
+      show: false,
+      searchValue: "",
+      searchCur: 0,
+      searchList: [
+        {
+          name: "豆瓣",
+          url: "https://search.douban.com/movie/subject_search?search_text=",
+        },
+        {
+          name: "百度",
+          url: "https://www.baidu.com/s?ie=UTF-8&wd=",
+        },
+        {
+          name: "谷歌",
+          url: "https://www.google.com/search?q=",
+        },
+        {
+          name: "爱奇艺",
+          url: "https://so.iqiyi.com/so/q_",
+        },
+        {
+          name: "腾讯视频",
+          url: "https://v.qq.com/x/search/?q=",
+        },
+        {
+          name: "优酷",
+          url: "https://so.youku.com/search_video/q_",
+        },
+        {
+          name: "乐视",
+          url: "http://so.le.com/s?wd=",
+        },
+        {
+          name: "网盘",
+          url: "http://www.slimego.cn/search.html?q=",
+        },
+      ],
     });
     const clickNav = (index) => {
       state.navIndex = index;
+      router.push(state.navList[index].url)
     };
-    return { clickNav, ...toRefs(state) };
+    const clickDropDown = () => {
+      state.show = !state.show;
+    };
+    const clickDropDownItem = (index) => {
+      state.searchCur = index;
+      state.show = false;
+    };
+    const search = () => {
+      let value = state.searchValue;
+      if (state.searchCur === 7)
+        window.open(
+          state.searchList[state.searchCur].url +
+            value +
+            "&page=1&rows=20&type=video"
+        );
+      else window.open(state.searchList[state.searchCur].url + value);
+    };
+    return {
+      clickNav,
+      ...toRefs(state),
+      clickDropDown,
+      clickDropDownItem,
+      search,
+    };
   },
 });
 </script>
@@ -73,6 +169,7 @@ export default defineComponent({
     flex: 1;
 
     .navContainer {
+      user-select: none;
       justify-content: space-evenly;
       align-items: center;
 
@@ -83,6 +180,11 @@ export default defineComponent({
         height: 100%;
         text-align: center;
         line-height: 60px;
+
+        &:hover {
+          color: @themeColor;
+          background: #6464648e;
+        }
       }
 
       .curNav {
@@ -130,18 +232,49 @@ export default defineComponent({
     }
 
     .dropDownMenu {
+      user-select: none;
       width: 160px;
+      cursor: pointer;
       align-items: center;
+      position: relative;
+
+      p:hover {
+        color: @themeColor;
+      }
+
+      .dropDown {
+        position: absolute;
+        background: #000000;
+        border: 1px solid #fad222;
+        top: 40px;
+        text-align: center;
+        left: -10px;
+        width: 100%;
+
+        .dropDownItem {
+          cursor: pointer;
+
+          &:hover {
+            color: @themeColor;
+            background: #6464648e;
+          }
+        }
+      }
+
+      .rotate {
+        transform: rotate(180deg);
+      }
 
       img {
-        width: 16px;
-        height: 16px;
+        width: 12px;
+        height: 12px;
       }
     }
   }
 
   .mine {
     margin-right: 60px;
+    user-select: none;
 
     .avator {
       width: 50px;

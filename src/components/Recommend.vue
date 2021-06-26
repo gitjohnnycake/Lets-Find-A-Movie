@@ -6,15 +6,17 @@
       </div>
       <div class="rightInfo fldc">
         <img class="rightImg wh" src="../assets/hh.jpeg" alt="" />
-        <div class="introduction mg-20">简介</div>
+        <div class="introduction mg-20 fs-14">
+          简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介
+        </div>
         <div class="btnList fl mg-10">
-          <div class="go fl cc">
+          <div class="go fl cc ts-3">
             <img src="../assets/playSmall.png" alt="" />
-            <p class="ml-8">Go</p>
+            <p class="ml-8 ts-3">Go</p>
           </div>
-          <div class="myList fl cc">
+          <div class="myList fl cc ts-3">
             <img src="../assets/plusSmall.png" alt="" />
-            <p class="ml-8">Add MyList</p>
+            <p class="ml-8 ts-3">Add MyList</p>
           </div>
         </div>
       </div>
@@ -25,15 +27,17 @@
       </div>
       <div class="rightInfo fldc">
         <img class="rightImg wh" src="../assets/hh.jpeg" alt="" />
-        <div class="introduction mg-20">简介</div>
+        <div class="introduction mg-20 fs-14">
+          简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介
+        </div>
         <div class="btnList fl mg-10">
-          <div class="go fl cc">
+          <div class="go fl cc ts-3">
             <img src="../assets/playSmall.png" alt="" />
-            <p class="ml-8">Go</p>
+            <p class="ml-8 ts-3">Go</p>
           </div>
-          <div class="myList fl cc">
+          <div class="myList fl cc ts-3">
             <img src="../assets/plusSmall.png" alt="" />
-            <p class="ml-8">Add MyList</p>
+            <p class="ml-8 ts-3">Add MyList</p>
           </div>
         </div>
       </div>
@@ -72,6 +76,10 @@ export default defineComponent({});
 
       .introduction {
         height: 100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
+        overflow: hidden;
       }
 
       .rightImg {
@@ -82,6 +90,18 @@ export default defineComponent({});
 
       .btnList {
         justify-content: space-around;
+
+        .go,
+        .myList {
+          user-select: none;
+          cursor: pointer;
+          &:hover {
+            transform: scale(1.1);
+          }
+          &:hover p {
+            color: @themeColor;
+          }
+        }
         img {
           width: 16px;
           height: 16px;

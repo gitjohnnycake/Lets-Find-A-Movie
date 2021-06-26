@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Index from "@/views/Index.vue"
 import Login from "@/views/Login.vue"
+import MyList from "@/views/MyList.vue"
 
 const history = createWebHistory()
 
@@ -19,6 +20,14 @@ const routes: Array<RouteRecordRaw> = [
     component: Login,
     meta: {
       "title": "登陆"
+    }
+  },
+  {
+    path: "/MyList",
+    name: "MyList",
+    component: MyList,
+    meta: {
+      "title": "我的片单"
     }
   },
 ]

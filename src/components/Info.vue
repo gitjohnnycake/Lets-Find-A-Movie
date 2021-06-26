@@ -18,11 +18,11 @@
       img:"require("../../assets/images/case4.png")" } } 方...
     </div>
     <div class="btnList fl">
-      <div class="go fl cc">
+      <div class="go fl cc ts-3">
         <img src="../assets/play.png" alt="" />
         <p class="ml-10">Go</p>
       </div>
-      <div class="myList fl cc">
+      <div class="myList fl cc ts-3">
         <img src="../assets/plus.png" alt="" />
         <p class="ml-10">Add MyList</p>
       </div>
@@ -100,12 +100,17 @@ export default defineComponent({
       background: @themeColor;
     }
     .myList {
-      background: #ffffff;
+      background: @white;
     }
     .go,
     .myList {
+      user-select: none;
+      cursor: pointer;
       padding: 10px 20px;
       border-radius: 30px;
+      &:hover {
+        transform: scale(1.2);
+      }
 
       p {
         color: #000000;
