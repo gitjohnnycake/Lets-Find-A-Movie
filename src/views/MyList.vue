@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <header>
-      <HEADER />
+      <HEADER :navCur="1" />
     </header>
     <article>
       <LIST />
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { defineComponent } from "@vue/runtime-core";
+import { defineComponent, reactive, toRefs } from "@vue/runtime-core";
 import HEADER from "../components/Header.vue";
 import LIST from "../components/List.vue";
 export default defineComponent({
@@ -19,6 +19,12 @@ export default defineComponent({
     HEADER,
     LIST
   },
+  setup() {
+    // const state = reactive({
+    //   navCur: 3
+    // })
+    // return { ...toRefs(state) }
+  }
 });
 </script>
 

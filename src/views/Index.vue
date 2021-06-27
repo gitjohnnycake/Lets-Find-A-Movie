@@ -1,12 +1,12 @@
 <template>
-  <!-- <img class="wh bg" :src="returnBgImg()" alt="" /> -->
-  <video class="bg" autoplay="autoplay" loop="loop" muted>
+  <LOADING v-if="loading" />
+  <video v-if="!loading" class="bg" autoplay="autoplay" loop="loop" muted>
     <source :src="returnBgVideo()" type="video/mp4" />
   </video>
-  <header class="header">
-    <HEADER />
+  <header v-if="!loading" class="header">
+    <HEADER :navCur="0" />
   </header>
-  <article class="content fl">
+  <article v-if="!loading" class="content fl">
     <div class="left fl cc">
       <INFO />
     </div>
@@ -40,13 +40,19 @@ export default defineComponent({
     RECOMMEND
   },
   setup() {
-    const state = reactive({});
+    const state = reactive({
+      loading: false
+    });
     const returnBgVideo = () => {
       const path = `../assets/demp.mp4`;
       const modules = import.meta.globEager("../assets/demp.mp4");
       return modules[path].default;
     };
-    onMounted(() => {});
+    onMounted(() => {
+      // setTimeout(() => {
+      //   state.loading = false
+      // }, 2000)
+    });
     // const state = reactive({
     //   clickLeft: false,
     //   clickRight: false,

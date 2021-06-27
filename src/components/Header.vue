@@ -62,20 +62,17 @@ import { defineComponent, reactive, toRefs, watch } from "@vue/runtime-core";
 import router from "../router";
 
 export default defineComponent({
-  setup() {
+  props: {
+    navCur: {
+      type: Number
+    }
+  },
+  setup(props) {
     const state = reactive({
       navList: [
         {
           name: "Home",
           url: "/",
-        },
-        {
-          name: "Movies",
-          url: "movies",
-        },
-        {
-          name: "Series",
-          url: "series",
         },
         {
           name: "My List",
@@ -121,8 +118,8 @@ export default defineComponent({
         },
       ],
     });
+    state.navIndex = props.navCur
     const clickNav = (index) => {
-      state.navIndex = index;
       router.push(state.navList[index].url)
     };
     const clickDropDown = () => {
@@ -197,7 +194,7 @@ export default defineComponent({
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          left: 45%;
+          left: 48%;
           bottom: 5px;
           background: @themeColor;
         }
