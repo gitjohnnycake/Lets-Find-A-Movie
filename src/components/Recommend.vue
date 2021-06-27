@@ -6,8 +6,9 @@
       </div>
       <div class="rightInfo fldc">
         <img class="rightImg wh" src="../assets/hh.jpeg" alt="" />
-        <div class="introduction mg-20 fs-14">
-          简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介
+        <div class="introductionTitle ml-10 mt-10 mr-10 fs-14">题目</div>
+        <div class="introduction mg-10 fs-13">
+          简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介
         </div>
         <div class="btnList fl mg-10">
           <div class="go fl cc ts-3">
@@ -27,8 +28,9 @@
       </div>
       <div class="rightInfo fldc">
         <img class="rightImg wh" src="../assets/hh.jpeg" alt="" />
-        <div class="introduction mg-20 fs-14">
-          简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介
+        <div class="introductionTitle ml-10 mt-10 mr-10 fs-14">题目</div>
+        <div class="introduction mg-10 fs-13">
+          简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介
         </div>
         <div class="btnList fl mg-10">
           <div class="go fl cc ts-3">
