@@ -3,7 +3,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 class HttpRequest {
   private readonly baseUrl: string;
   constructor() {
-    this.baseUrl = 'http://localhost:3000'
+    this.baseUrl = '/api'
   }
   getInsideConfig() {
     const config = {

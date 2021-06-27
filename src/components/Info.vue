@@ -1,6 +1,6 @@
 <template>
   <div class="container fldc mb-40">
-    <div class="title mg-20">新世纪</div>
+    <div class="title mg-20">{{ movie[0].title }}</div>
     <div class="info fl mb-20">
       <div
         class="infoItem fl cc"
@@ -8,14 +8,13 @@
         :key="index"
       >
         <img :src="returnIcon(item.img)" alt="" />
-        <p class="ml-10">{{ item.info }}</p>
+        <p class="ml-10" v-if="index == 0">豆瓣: {{ item.info }}</p>
+        <p class="ml-10" v-if="index == 1">DURATION:{{ item.info }}</p>
+        <p class="ml-10" v-if="index == 2">YEAR: {{ item.info }}</p>
       </div>
     </div>
     <div class="introduction mb-32">
-      vue动态引入本地图片的方法总结 - 法国梧桐和小伙子 - 博... 2019年10月15日
-      方法二:框架里面引入本地图片(在引入vue.js的情况下使用会报错)
-      直接在data中引入。 data:{ return{
-      img:"require("../../assets/images/case4.png")" } } 方...
+      {{ movie[0].actors }}
     </div>
     <div class="btnList fl">
       <div class="go fl cc ts-3">
@@ -31,32 +30,51 @@
 </template>
 
 <script>
-import { defineComponent, reactive, toRefs } from "@vue/runtime-core";
+import {
+  defineComponent,
+  onMounted,
+  reactive,
+  toRefs,
+} from "@vue/runtime-core";
 
 export default defineComponent({
   name: "Info",
-  setup() {
+  props: {
+    movieList: {
+      type: Array,
+    },
+  },
+  setup(props) {
     const state = reactive({
       infoList: [
         {
           img: "star.png",
-          info: "豆瓣 8.0",
+          info: "",
         },
         {
           img: "time.png",
-          info: "DURATION: 1H 54M",
+          info: "",
         },
         {
           img: "date.png",
-          info: "YEAR: 2000",
+          info: "",
         },
       ],
+      movie: [],
     });
+    state.movie = props.movieList;
     const returnIcon = (src) => {
       const path = `../assets/${src}`;
       const modules = import.meta.globEager("../assets/*.png");
       return modules[path].default;
     };
+    onMounted(() => {
+      state.infoList.forEach((item, index) => {
+        if (index == 0) item.info = state.movie[0].rate;
+        if (index == 1) item.info = state.movie[0].duration;
+        if (index == 2) item.info = state.movie[0].release_year;
+      });
+    });
     return {
       returnIcon,
       ...toRefs(state),

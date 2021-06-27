@@ -1,37 +1,13 @@
 <template>
   <div class="container fldc">
-    <div class="item fl">
+    <div class="item fl" v-for="(movie, index) in movie" :key="index">
       <div class="leftImg">
-        <img class="wh" src="../assets/hh.jpeg" alt="" />
+        <img class="wh" :src="movie.cover" alt="" />
       </div>
       <div class="rightInfo fldc">
-        <img class="rightImg wh" src="../assets/hh.jpeg" alt="" />
-        <div class="introductionTitle ml-10 mt-10 mr-10 fs-14">题目</div>
-        <div class="introduction mg-10 fs-13">
-          简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介
-        </div>
-        <div class="btnList fl mg-10">
-          <div class="go fl cc ts-3">
-            <img src="../assets/playSmall.png" alt="" />
-            <p class="ml-8 ts-3">Go</p>
-          </div>
-          <div class="myList fl cc ts-3">
-            <img src="../assets/plusSmall.png" alt="" />
-            <p class="ml-8 ts-3">Add MyList</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="item fl">
-      <div class="leftImg">
-        <img class="wh" src="../assets/hh.jpeg" alt="" />
-      </div>
-      <div class="rightInfo fldc">
-        <img class="rightImg wh" src="../assets/hh.jpeg" alt="" />
-        <div class="introductionTitle ml-10 mt-10 mr-10 fs-14">题目</div>
-        <div class="introduction mg-10 fs-13">
-          简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介
-        </div>
+        <img class="rightImg wh" :src="movie.cover" alt="" />
+        <div class="introductionTitle ml-10 mt-10 mr-10 fs-14">{{movie.title}}</div>
+        <div class="introduction mg-10 fs-13">{{movie.actors}}</div>
         <div class="btnList fl mg-10">
           <div class="go fl cc ts-3">
             <img src="../assets/playSmall.png" alt="" />
@@ -48,9 +24,21 @@
 </template>
 
 <script>
-import { defineComponent } from "@vue/runtime-core";
+import { defineComponent, reactive, toRefs } from "@vue/runtime-core";
 
-export default defineComponent({});
+export default defineComponent({
+  props: {
+    movieList: {
+      type: Array
+    }
+  },
+  setup(props) {
+    const state = reactive({
+      movie: props.movieList.slice(1, 3)
+    })
+    return { ...toRefs(state) }
+  }
+});
 </script>
 
 <style lang="less" scoped>

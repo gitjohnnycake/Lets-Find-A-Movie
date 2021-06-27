@@ -8,10 +8,10 @@
   </header>
   <article v-if="!loading" class="content fl">
     <div class="left fl cc">
-      <INFO />
+      <INFO :movieList="movieList" />
     </div>
     <div class="right fl">
-      <RECOMMEND />
+      <RECOMMEND :movieList="movieList" />
     </div>
   </article>
   <!-- <Suspense>
@@ -30,6 +30,7 @@ import HEADER from "../components/Header.vue";
 import INFO from "../components/Info.vue";
 import RECOMMEND from "../components/Recommend.vue";
 import { defineComponent, onMounted, reactive, toRefs } from "vue";
+import { getMovie } from "../api/index";
 
 export default defineComponent({
   name: "App",
@@ -37,17 +38,23 @@ export default defineComponent({
     LOADING,
     HEADER,
     INFO,
-    RECOMMEND
+    RECOMMEND,
   },
   setup() {
     const state = reactive({
-      loading: false
+      loading: true,
+      movieList: [],
     });
     const returnBgVideo = () => {
       const path = `../assets/demp.mp4`;
       const modules = import.meta.globEager("../assets/demp.mp4");
       return modules[path].default;
     };
+    getMovie().then((res) => {
+      console.log(res.data);
+      state.movieList = res.data;
+      state.loading = false
+    });
     onMounted(() => {
       // setTimeout(() => {
       //   state.loading = false
@@ -108,7 +115,7 @@ export default defineComponent({
   .left {
     flex: 2;
   }
-  
+
   .right {
     flex: 1;
     justify-content: flex-end;

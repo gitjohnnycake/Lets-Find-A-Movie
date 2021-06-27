@@ -1,8 +1,8 @@
 import http from './http'
 
-export const menuList = () => {
+export const getMovie = () => {
   return http.request({
-    url: '/users/menuList',
+    url: '/movie',
     method: 'get'
   })
 }
