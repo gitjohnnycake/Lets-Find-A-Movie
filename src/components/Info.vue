@@ -35,6 +35,7 @@ import {
   onMounted,
   reactive,
   toRefs,
+  watchEffect,
 } from "@vue/runtime-core";
 
 export default defineComponent({
@@ -62,7 +63,14 @@ export default defineComponent({
       ],
       movie: [],
     });
-    state.movie = props.movieList;
+    watchEffect(() => {
+      state.movie = props.movieList;
+      state.infoList.forEach((item, index) => {
+        if (index == 0) item.info = state.movie[0].rate;
+        if (index == 1) item.info = state.movie[0].duration;
+        if (index == 2) item.info = state.movie[0].release_year;
+      });
+    });
     const returnIcon = (src) => {
       const path = `../assets/${src}`;
       const modules = import.meta.globEager("../assets/*.png");

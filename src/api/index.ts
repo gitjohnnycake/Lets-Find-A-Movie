@@ -6,3 +6,10 @@ export const getMovie = () => {
     method: 'get'
   })
 }
+
+export const getAnotherTwo = () => {
+  return http.request({
+    url: '/anotherTwo',
+    method: 'get'
+  })
+}

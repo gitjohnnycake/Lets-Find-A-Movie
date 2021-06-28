@@ -1,16 +1,12 @@
 <template>
   <div class="loading fl cc">
-    <ul class="mb-40">
-      <li
-        v-for="(item, index) in range"
-        :key="index"
-        :class="'item' + (index + 1)"
-      ></li>
-    </ul>
+    <div class="box">
+      <div class="eye"></div>
+    </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   setup() {
     const range = 9;
@@ -20,60 +16,64 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@keyframes loading {
-  0%,
-  5%,
-  95%,
-  100% {
-    transform: translate(0, 0) rotate(0deg);
+@-webkit-keyframes eyeball {
+  0% {
+    left: 9px;
   }
-  30%,
-  70% {
-    transform: translate(-50px, 0px) rotate(-90deg);
+  100% {
+    left: 1px;
   }
 }
-each(range(9), {
-  .item@{value} {
-    animation-delay: if(@value > 2, ((@value - 2) * 50ms) , 0)!important;
+@-moz-keyframes eyeball {
+  0% {
+    left: 9px;
   }
-});
+  100% {
+    left: 1px;
+  }
+}
+@keyframes eyeball {
+  0% {
+    left: 9px;
+  }
+  100% {
+    left: 1px;
+  }
+}
 @distance: 44px;
 .loading {
   width: 100vw;
   height: 100vh;
-  background-color: #5aaae5;
+  background-color: #000000;
 
-  ul {
-    position: relative;
+  .box {
+    width: 100px;
+    background-color: rgba(0, 0, 0, 0.02);
+    height: 100px;
+    border-radius: 1px;
 
-    li {
-      width: 36px;
-      height: 36px;
-      background-color: #fff;
-      border-radius: 2px;
-      margin: 2px;
-      position: absolute;
-      animation: loading 2s ease-in-out infinite;
+    .eye {
+      width: 20px;
+      height: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      box-shadow: 30px 0px 0px 0px rgb(255 255 255 / 80%);
+      position: relative;
+      margin: 36px 26px;
 
-      &:nth-child(2),
-      &:nth-child(5),
-      &:nth-child(8) {
-        left: @distance;
-      }
-      &:nth-child(3),
-      &:nth-child(6),
-      &:nth-child(9) {
-        left: @distance * 2;
-      }
-      &:nth-child(4),
-      &:nth-child(5),
-      &:nth-child(6) {
-        top: @distance;
-      }
-      &:nth-child(7),
-      &:nth-child(8),
-      &:nth-child(9) {
-        top: @distance * 2;
+      &::after {
+        background-color: #59488b;
+        width: 10px;
+        height: 10px;
+        box-shadow: 30px 0px 0px 0px #59488b;
+        border-radius: 50%;
+        left: 9px;
+        top: 8px;
+        position: absolute;
+        content: "";
+        -webkit-animation: eyeball .4s linear infinite alternate;
+        -moz-animation: eyeball .4s linear infinite alternate;
+        animation: eyeball .4s linear infinite alternate;
       }
     }
   }
