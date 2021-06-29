@@ -29,7 +29,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {
   defineComponent,
   onMounted,
@@ -37,6 +37,11 @@ import {
   toRefs,
   watchEffect,
 } from "@vue/runtime-core";
+
+// interface state {
+//   infoList: Array<any>,
+//   movie: Array<any>
+// }
 
 export default defineComponent({
   name: "Info",
@@ -46,7 +51,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const state = reactive({
+    const state: any = reactive({
       infoList: [
         {
           img: "star.png",
@@ -65,22 +70,22 @@ export default defineComponent({
     });
     watchEffect(() => {
       state.movie = props.movieList;
-      state.infoList.forEach((item, index) => {
-        if (index == 0) item.info = state.movie[0].rate;
-        if (index == 1) item.info = state.movie[0].duration;
-        if (index == 2) item.info = state.movie[0].release_year;
+      state.infoList.forEach((item: any, index: number) => {
+        if (index == 0) item.info = (state.movie[0] as any).rate;
+        if (index == 1) item.info = (state.movie[0] as any).duration;
+        if (index == 2) item.info = (state.movie[0] as any).release_year;
       });
     });
-    const returnIcon = (src) => {
+    const returnIcon = (src: string) => {
       const path = `../assets/${src}`;
       const modules = import.meta.globEager("../assets/*.png");
       return modules[path].default;
     };
     onMounted(() => {
-      state.infoList.forEach((item, index) => {
-        if (index == 0) item.info = state.movie[0].rate;
-        if (index == 1) item.info = state.movie[0].duration;
-        if (index == 2) item.info = state.movie[0].release_year;
+      state.infoList.forEach((item: any, index: number) => {
+        if (index == 0) item.info = (state.movie[0] as any).rate;
+        if (index == 1) item.info = (state.movie[0] as any).duration;
+        if (index == 2) item.info = (state.movie[0] as any).release_year;
       });
     });
     return {

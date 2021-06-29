@@ -1,13 +1,6 @@
 <template>
   <LOADING v-if="loading" />
-  <video
-    v-if="!loading"
-    class="bg"
-    autoplay="autoplay"
-    loop="loop"
-    muted
-  >
-    <source :src="cgSrc" type="video/mp4" />
+  <video v-if="!loading" :src="cgSrc" type="video/mp4" class="bg" autoplay="autoplay" loop="loop" muted>
   </video>
   <header v-if="!loading" class="header">
     <HEADER :navCur="0" />
@@ -27,13 +20,14 @@ import LOADING from "../components/Loading.vue";
 import HEADER from "../components/Header.vue";
 import INFO from "../components/Info.vue";
 import RECOMMEND from "../components/Recommend.vue";
-import {
-  defineComponent,
-  reactive,
-  toRefs,
-  watch,
-} from "vue";
+import { defineComponent, reactive, toRefs } from "vue";
 import { getMovie } from "../api/index";
+
+interface state {
+  loading: boolean,
+  movieList: Array<any>,
+  cgSrc: string
+}
 
 export default defineComponent({
   name: "App",
@@ -44,13 +38,16 @@ export default defineComponent({
     RECOMMEND,
   },
   setup() {
-    const state = reactive({
+    const state: state = reactive({
       loading: true,
       movieList: [],
       cgSrc: "",
     });
     function clickMovie(movie: any): void {
+      state.loading = true
       state.movieList = movie;
+      state.cgSrc = (state.movieList[0] as any).cg;
+      state.loading = false
     }
     getMovie().then((res) => {
       console.log(res.data);
@@ -58,13 +55,6 @@ export default defineComponent({
       state.cgSrc = res.data[0].cg;
       state.loading = false;
     });
-    watch(
-      () => state.cgSrc,
-      (newValue, oldValue) => {
-        state.cgSrc = '';
-        state.cgSrc = newValue;
-      }
-    );
     return {
       ...toRefs(state),
       clickMovie,
@@ -95,6 +85,7 @@ export default defineComponent({
 
 .header {
   height: 60px;
+  background: #00000091;
 }
 
 .content {

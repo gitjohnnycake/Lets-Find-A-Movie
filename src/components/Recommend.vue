@@ -43,7 +43,6 @@ export default defineComponent({
     const state = reactive({
       movie: [],
       rocommendCilck(index: number) {
-        console.log(index);
         getAnotherTwo().then((res: any) => {
           state.movie[0] = state.movie[index];
           state.movie = state.movie.slice(0, 1).concat(res.data);
