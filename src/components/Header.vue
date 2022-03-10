@@ -57,15 +57,15 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, reactive, toRefs, watch } from "@vue/runtime-core";
 import router from "../router";
 
 export default defineComponent({
   props: {
     navCur: {
-      type: Number
-    }
+      type: Number,
+    },
   },
   setup(props) {
     const state = reactive({
@@ -118,14 +118,14 @@ export default defineComponent({
         },
       ],
     });
-    state.navIndex = props.navCur
-    const clickNav = (index) => {
-      router.push(state.navList[index].url)
+    state.navIndex = props.navCur;
+    const clickNav = (index: number) => {
+      router.push(state.navList[index].url);
     };
     const clickDropDown = () => {
       state.show = !state.show;
     };
-    const clickDropDownItem = (index) => {
+    const clickDropDownItem = (index: number) => {
       state.searchCur = index;
       state.show = false;
     };

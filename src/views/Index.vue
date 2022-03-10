@@ -39,7 +39,7 @@ export default defineComponent({
   },
   setup() {
     const state: state = reactive({
-      loading: true,
+      loading: false,
       movieList: [],
       cgSrc: "",
     });
